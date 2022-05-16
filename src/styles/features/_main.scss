@@ -1,0 +1,157 @@
+@import "../global/variable";
+
+.main {
+    background:$pg-color;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+
+    .box-message {
+        position: absolute;
+        top: 10%;
+        right: 20%;
+        background: #fff;
+        width: 400px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        padding: 0;
+
+        svg {
+            cursor: pointer;
+        }
+
+
+        &-status{
+            background: $color-secondary;
+            width: 100%;
+            padding: 5px 20px;
+            display: flex;
+            justify-content: flex-end;
+
+            svg:not(:first-child) {
+                margin-left: 12px;
+            }
+        }
+
+        &-view{
+            padding: 0px 20px;
+            padding-top: 15px;
+            height: 400px;
+            overflow-y: auto;
+
+            .message-item {
+                display: flex;
+                padding-bottom: 10px;
+
+                &-avatar {
+                    width: 55px;
+                    height: 55px;
+                    border-radius: 50%;
+                    border: 1px solid #f1f1f1;
+                    overflow: hidden;
+
+                    img {
+                        width: 100%;
+                        object-fit: cover;
+                    }
+                }
+
+                &-text {
+                    padding: 10px;
+                    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+                    border-radius: 0px 20px 20px 22px;
+                    max-width: 75%;
+                    word-break: break-all;
+                    margin-top: 25px;
+                }
+            }
+        }
+
+        .message-item--sender {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-start;
+
+            .message-item-text{
+                right: 55px;
+                left: auto;
+                border-radius: 20px 0px 20px 20px
+            }
+        }
+
+         #web-view::-webkit-scrollbar-track
+        {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            background-color: #F5F5F5;
+        }
+
+        #web-view::-webkit-scrollbar
+        {
+            width: 12px;
+            background-color: #F5F5F5;
+        }
+
+        #web-view::-webkit-scrollbar-thumb
+        {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+            background-color: #d2e2f4;
+        }
+
+
+        &-input{
+            padding: 0px 20px;
+            padding-bottom: 20px;
+
+            .input-bonus {
+                display: flex;
+                margin-bottom: 10px;
+                border-top: 1px solid #f1f1f1;
+                padding-top: 10px;
+                display: flex;
+                align-items: center;
+                position: relative;
+
+                svg:not(:first-child) {
+                    margin-left: 8px;
+                }
+
+                .emoji-box {
+                    position: absolute;
+                    top: -295px;
+                    left: 0px;
+                }
+            }
+
+            .input-bar {
+                display: flex;
+                .input-field {
+                    flex: 1;
+                    border-radius: 4px;
+                    outline: none;
+                    border: none;
+                    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+                    padding: 0 15px;
+                    margin-right: 10px;
+                }
+    
+                .btn-send {
+                    padding: 6px 8px;
+                    border-radius: 4px;
+                    background: $pg-color;
+                    outline: none;
+                    border: none;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+                }
+
+            }
+
+        }
+    }
+}

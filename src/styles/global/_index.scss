@@ -1,0 +1,9 @@
+@import "./variable";
+
+.container {
+    margin: 0px auto;
+    
+    @include pc {
+        max-width: 75%;
+    }
+}

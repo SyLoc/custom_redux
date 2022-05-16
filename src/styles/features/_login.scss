@@ -1,0 +1,66 @@
+@import "../global/variable";
+
+.login {
+    width: 400px;
+    height: 300px;
+    margin: 200px auto;
+    display: block;
+    padding: 20px 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    
+    &-title {
+        font-size:24px;
+        color: $color-secondary;
+        line-height: 2;
+        margin-bottom: 10px;
+        text-transform: capitalize;
+        text-align: center;
+    }
+
+    &-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .first-field, .secondary-field {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+
+            label {
+                margin-bottom: 4px;
+                color: $color-secondary;
+                font-weight: 600;
+            }
+            
+            .input-field {
+                padding: 4px 10px;
+                outline: none;
+                border: none;
+                box-shadow: 0 0 2px rgb(0, 0, 0);
+                margin-bottom: 10px;
+            }
+
+            &-eye {
+                position: absolute;
+                top: 26px;
+                right: 10px;
+                cursor: pointer;
+            }
+        }
+
+
+        .btn-submit {
+            padding: 6px 10px;
+            background: $color-secondary;
+            border: none;
+            outline: none;
+            color: #fff;
+            border-radius: 5px;
+            text-transform: capitalize;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+    }
+}
