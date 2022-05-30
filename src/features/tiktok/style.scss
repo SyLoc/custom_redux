@@ -1,0 +1,29 @@
+
+.video-tiktok {
+    .wrap-video {
+        position: relative;
+        width: 600px;
+        height: 800px;
+    }
+
+    button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        background: none;
+        border: none;
+        outline: none;
+        .icon-play {           
+            height: 50px;
+            width: 50px;
+            color: rgba(255, 255, 255, 0.58);
+            transition: all .3s linear;
+            cursor: pointer;
+
+            &:hover {
+                color: white;
+            }
+        }
+    }
+}

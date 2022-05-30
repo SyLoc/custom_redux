@@ -1,4 +1,4 @@
-import React, { useContext, useReducer } from "react"
+import React, { useContext, useReducer, useState } from "react"
 
 const initAuth = {
   userName: "",
@@ -7,6 +7,9 @@ const initAuth = {
   email: "",
   status: "enable",
   count: 0,
+  cp1: "",
+  cp2: "",
+  cp3: "",
 };
 
 function reducer(state, action) {
@@ -16,8 +19,13 @@ function reducer(state, action) {
     case 'decrement':
       return {...state, count: state.count - 1};
     case 'SET_ADMIN':
-      console.log(action)
       return {...state, isAdmin: action.payload};
+    case 'update-cp1':
+      return {...state, cp1: action.payload};
+    case 'update-cp2':
+      return {...state, cp2: action.payload};
+    case 'update-cp3':
+      return {...state, cp3: action.payload};
     default:
       throw new Error();
   }
