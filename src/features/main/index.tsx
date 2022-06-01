@@ -90,7 +90,7 @@ const Main: React.FC<any> = () => {
                         messList.map((mess) => (
                             <div key={mess.id} className={`message-item ${mess.isSender && "message-item--sender"}`}>
                                 <div className="message-item-avatar">
-                                    <Avatar src={mess.avatar} />
+                                    <Avatar style={{ width:"100%", height:"100%" }} src={mess.avatar} />
                                 </div>
                                 <div className="message-item-text">
                                     {mess.message}
