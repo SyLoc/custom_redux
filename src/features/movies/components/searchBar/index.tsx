@@ -26,6 +26,7 @@ const SearchBar: React.FC<any> = (props) => {
         }
         
         onSubmit(refInputValue)
+        setValue("")
     }
 
     useEffect(() => {
