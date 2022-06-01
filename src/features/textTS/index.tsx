@@ -1,6 +1,7 @@
 import React from "react"
 import SearchBar from "../movies/components/searchBar";
 import Steps from "../steps";
+import { useNavigate } from "react-router-dom";
 
 const steps = [
     {
@@ -36,6 +37,7 @@ const steps = [
 ]
 
 const TestTS: React.FC<any> = (props) => {
+    const navigate = useNavigate();
 
     // let arr: string[];
     // let object: {
@@ -59,6 +61,11 @@ const TestTS: React.FC<any> = (props) => {
 
             <div style={{maxWidth:"900px"}}>
             <Steps stepsDefault={steps} onStepActive={(item: any) => console.log("item", item)}/>
+            </div>
+
+            <div style={{marginTop: "40px"}}>
+            <button onClick={() => navigate('/about')}>go to about</button>
+            <button onClick={() => navigate('/chat')}>go to chat</button>
             </div>
         </div>
     )
