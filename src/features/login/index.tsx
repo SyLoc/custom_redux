@@ -1,52 +1,47 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../../contexts/useAuthContext'
+import { findUserByEmail, updateNode } from "../../actionsWithFirestore"
+import { userProps } from "../../contexts/useAuthContext/authInterfaces"
 
-const users = [
-    {
-        id: "user001",
-        name: "john",
-        email: "john@gmail.com",
-        avatar: "https://i.pravatar.cc/210",
-        password: "john123"
-    },
-    {
-        id: "user002",
-        name: "lisa",
-        email: "lisa@gmail.com",
-        avatar: "https://i.pravatar.cc/210",
-        password: "lisa123"
-    }
-]
 
 const Login: React.FC<any> = () => {
     const navigate = useNavigate()
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
     const [isShowPass, setIsShowPass] = useState(false)
     const notifcation = () => alert("Wrong email or password!")
-    const { count, onDispatchAuth } = useAuthContext();
+    const { onDispatchAuth } = useAuthContext();
 
-    console.log("login count", count)
+    const RefEmail = useRef<HTMLInputElement>(null) 
+    const RefPass = useRef<HTMLInputElement>(null) 
 
 
     const handleSubmit = (e: any) => {
         e.preventDefault()
 
+        const email = RefEmail.current!.value;
+        const password = RefPass.current!.value;
+
         if(email && password) {
-            const user = users.find((item) => item.email === email)
-            if(user) {
-                if(user.password === password) {
-                    onDispatchAuth({type:"SET_ADMIN", payload:true})
-                    navigate('/chat');
-                }
-                else{
+            findUserByEmail(email).then((user: userProps | null) => {
+                if(user) {
+                    if(user.password === password) {
+                        const payload = {...user, password:"", status:"active"}
+                        onDispatchAuth({type:"LOGIN", payload: payload})
+                        updateNode("users", user.id, {status: "active"})
+                        localStorage.setItem("currentUser", JSON.stringify(payload))
+                        navigate('/chat');
+    
+                        RefEmail.current!.value = ""
+                        RefPass.current!.value = ""
+                    }
+                    else{
+                        notifcation()
+                    }
+                }else{
                     notifcation()
                 }
-            }else{
-                notifcation()
-            }
+            })
         }
     }
 
@@ -65,8 +60,7 @@ const Login: React.FC<any> = () => {
                         className="input-field"
                         id="email-field"
                         type="email" 
-                        value={email}
-                        onChange={(event: any) => setEmail(event.target.value)}
+                        ref={RefEmail}
                         name="email" 
                         required />
                 </div>
@@ -76,9 +70,8 @@ const Login: React.FC<any> = () => {
                         className="input-field"
                         type={`${isShowPass ? "text" : "password"}`} 
                         id="password-field"
-                        value={password}
-                        onChange={(event: any) => setPassword(event.target.value)}
                         name="password" 
+                        ref={RefPass}
                         required />
                     {
                         isShowPass ? <AiFillEyeInvisible onClick={handleShowPass} className="secondary-field-eye"/> 

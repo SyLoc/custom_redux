@@ -1,124 +1,88 @@
-import React, { useEffect, useRef, useState } from "react";
-import { IoMdClose } from 'react-icons/io'
-import { BiMinus } from 'react-icons/bi'
-import { MdInsertEmoticon, MdCameraAlt } from 'react-icons/md'
-import { GrSend, GrLocation } from 'react-icons/gr'
+import React, { useEffect, useState } from "react";
 import { Avatar } from 'antd';
-import Picker from 'emoji-picker-react';
 import { useAuthContext } from '../../contexts/useAuthContext'
-import { useNavigate } from 'react-router-dom'
+import { getNote, updateNode, createNote, getNotes } from "../../actionsWithFirestore/index"
+import MessageView from './components/messageView'
+import FriendsList from "./components/friendsList";
+
 
 const Main: React.FC<any> = () => {
-    const [mess, setMess] = useState<string>('');
-    const refBoxMess = useRef<any>(null)
-    const [showEmoji, setShowEmoji] = useState(false)
-    const refOutside = useRef<any>(null)
-    const { count, isLogin, onDispatchAuth } = useAuthContext();
-    const navigate = useNavigate()
+    const { onDispatchAuth, currentUser } = useAuthContext();
+    const [messList, setMessList] = useState<any>([])
+    const [resMsList, setResMsList] = useState<any>([])
+    const [friendsList, setFriendsList] = useState<any>([])
 
 
-    console.log("count", count)
-    console.log("isLogin", isLogin)
 
+    const getFriendsList = () => {
+        getNote('users', currentUser.id).then((data) => {
+            setMessList(data?.messages)
+            return data?.friendsList
+        }).then((frList) => {
+            getNotes('users').then((users) => {
+                const friends = users.filter((user) => frList.includes(user.id))
+                return friends
+            }).then((data) => {
+                setFriendsList(data);
+            })
+        })
 
-    const [messList, setMessList] = useState([
-        {
-            id: 1,
-            avatar: "https://i.pravatar.cc/200",
-            message: "hellooooooooo",
-            isSender: false,
-        },
-        {
-            id: 2,
-            avatar: "https://i.pravatar.cc/210",
-            message: "hi",
-            isSender: true,
-        },
-    ])
-
-    const handleSendMessage = (e: any) => {
-        e.preventDefault()
-        if(mess) {
-            const newMess = {
-                id: new Date().getTime(),
-                avatar: "https://i.pravatar.cc/210",
-                message: mess,
-                isSender: true,
-            }
-            setMessList([...messList, newMess])
-            setMess('')
-        }
-
+        
+        // .then((msList) => {
+        //     getNotes('messages').then((data) => {
+        //         const friends = data.filter((mess) => msList.includes(mess?.id))
+        //         return friends
+        //     }).then((friends: any[]) => {
+        //         let arr:any[] = []
+        //         friends.map((fr) => {
+        //             const abc = fr?.usersID.filter((id:string) => id !== currentUser.id)
+        //             arr.push(...abc)
+        //         })
+        //         return arr
+        //     }).then((data) => console.log(data))
+        // })
     }
 
     useEffect(() => {
-        if(refBoxMess) {
-            refBoxMess.current.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})
-        }
-    }, [messList])
+        getFriendsList()
+    }, [])
 
-    const onEmojiClick = (event: any, emojiObject: any) => {
-        setMess(mess + emojiObject.emoji)
-    };
-
-    useEffect(() => {
-        if(showEmoji) {
-            document.addEventListener('click', handleOutside)
-        }
-
-        return () => document.removeEventListener('click', handleOutside)
-    },[showEmoji])
-
-    const handleOutside = (event: any) => {
-        const { target } = event
-        if (!refOutside.current.contains(target)) {
-            setShowEmoji(false)
-        }
+    const handleAdd = () => {
+        // createNote('users', {
+        //     admin: false,
+        //     age: 32,
+        //     avatar: "https://i.pravatar.cc/210",
+        //     email: "rose@gmail.com",
+        //     name: "rose",
+        //     password: "rose321",
+        //     listMessage: [],
+        //     messages:[],
+        //     status: "inactive"
+        // })
     }
+
 
     return (
         <div className="main">
-            <button type="button" onClick={() => onDispatchAuth({type: 'increment'})}>click me</button>
-            <button type="button" onClick={() => navigate("/login")}>go to login page</button>
+            <button type="button" onClick={handleAdd}>click me</button>
+            <button type="button" onClick={() => onDispatchAuth({ type: "LOGOUT" })}>logout</button>
             <div className="box-message">
                 <div className="box-message-status">
-                    <BiMinus />
-                    <IoMdClose />
-                </div>
-                <div className="box-message-view" id="web-view">
-                    {
-                        messList.map((mess) => (
-                            <div key={mess.id} className={`message-item ${mess.isSender && "message-item--sender"}`}>
-                                <div className="message-item-avatar">
-                                    <Avatar style={{ width:"100%", height:"100%" }} src={mess.avatar} />
-                                </div>
-                                <div className="message-item-text">
-                                    {mess.message}
-                                </div>
-                            </div>
-                        ))
-                    }
-                    <div ref={refBoxMess}/>
-                    
-                </div>
-                <div className="box-message-input">
-                    <div className="input-bonus" ref={refOutside}>
-                        <MdCameraAlt />
-                        <MdInsertEmoticon onClick={() => setShowEmoji(true)} />
-                        <GrLocation />
-                        {
-                            showEmoji && (
-                                <div className="emoji-box">
-                                    <Picker onEmojiClick={onEmojiClick} pickerStyle={{ MaxWidth: '80%'}} />
-                                </div>
-                            )
-                        }
+                    <div className="chat-user">
+                        <div className={`badge ${currentUser.status === "active" ? "badge--active" : ""}`} />
+                        <Avatar className="user-image" style={{ width: "40px", height: "40px" }} src={currentUser.avatar} >
+                        </Avatar>
+                        <div className="user-name">
+                            {currentUser.name}
+                        </div>
                     </div>
-                    <form className="input-bar" onSubmit={handleSendMessage}>
-                        <input type="text" placeholder="Type your message" value={mess} className="input-field" onChange={(e: any) => setMess(e.target.value)} />
-                        <button type="submit" className="btn-send"><GrSend /></button>
-                    </form>
+                    <div>
+                        {/* <BiMinus />
+                    <IoMdClose /> */}
+                    </div>
                 </div>
+                    <FriendsList friendsList={friendsList}/>
+                {/* <MessageView messList={messList} getMessages={getMessages}/> */}
             </div>
         </div>
     )

@@ -4,18 +4,38 @@
     background:$pg-color;
     min-height: 100vh;
     width: 100%;
-    position: relative;
+    padding-top: 10vh;
 
     .box-message {
-        position: absolute;
-        top: 10%;
-        right: 20%;
+        margin: auto;
         background: #fff;
-        width: 400px;
+        max-width: 400px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         overflow: hidden;
         padding: 0;
+
+
+        .web-view-scrollbar::-webkit-scrollbar-track
+        {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            background-color: #F5F5F5;
+        }
+
+        .web-view-scrollbar::-webkit-scrollbar
+        {
+            width: 12px;
+            background-color: #F5F5F5;
+        }
+
+        .web-view-scrollbar::-webkit-scrollbar-thumb
+        {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+            background-color: #d2e2f4;
+        }
+
 
         svg {
             cursor: pointer;
@@ -23,16 +43,105 @@
 
 
         &-status{
-            background: $color-secondary;
+            // background: $color-secondary;
+            background-image: linear-gradient(45deg, #ba6ee7 2%, #71DCFFFF 95%);
             width: 100%;
             padding: 5px 20px;
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
+            align-items: center;
 
-            svg:not(:first-child) {
-                margin-left: 12px;
+            .chat-user {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                position: relative;
+
+                .badge {
+                    position: absolute;
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    border: 1px solid #fff;
+                    background-color: #bfbfbf;
+                    top: 0;
+                    left: 30px;
+                    z-index: 100;
+                }
+
+                .badge--active {
+                    background-color: rgb(13, 218, 13);
+                }
+
+                .user-name {
+                    text-transform: capitalize;
+                    font-size: 14px;
+                    margin-left: 10px;
+                }
+
+
+
+            }
+
+            div {
+                svg:not(:first-child) {
+                    margin-left: 12px;
+                }
             }
         }
+
+        .friends-list-box {
+
+            color: #333;
+            padding: 10px 20px;
+            height: 400px;
+            overflow-y: auto;
+
+            .friends-list {
+                &-item {
+                    display: flex;
+                    align-items: center;
+                    border-bottom: 1px solid #f2f2f2;
+                    padding: 8px 0;
+                    cursor: pointer;
+    
+                    .friend-item-info {
+                        margin-left: 10px;
+    
+                        h4 {
+                            text-transform: capitalize;
+                            margin-bottom: 0;
+                            line-height: 1;
+                        }
+    
+                        p {
+                            font-size: 12px;
+                            margin-bottom: 0;
+                            color: #555;
+                        }
+                    }
+                }
+
+                &-item:nth-child(2) {
+                    padding-top: 35px;
+                }
+
+                &-item:last-child {
+                    margin-bottom: 10px;
+                }
+            }
+
+            .first-bar {
+                position: fixed;
+                background: white;
+                width: 360px;
+                z-index: 100;
+                margin-top: -10px;
+                padding-top: 10px;
+            }
+        }
+
 
         &-view{
             padding: 0px 20px;
@@ -80,26 +189,6 @@
                 border-radius: 20px 0px 20px 20px;
                 color: #333;
             }
-        }
-
-         #web-view::-webkit-scrollbar-track
-        {
-            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-            border-radius: 10px;
-            background-color: #F5F5F5;
-        }
-
-        #web-view::-webkit-scrollbar
-        {
-            width: 12px;
-            background-color: #F5F5F5;
-        }
-
-        #web-view::-webkit-scrollbar-thumb
-        {
-            border-radius: 10px;
-            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-            background-color: #d2e2f4;
         }
 
 

@@ -1,7 +1,18 @@
 import React, { useContext, useReducer } from "react"
+import { updateNode } from "../../actionsWithFirestore"
 
 const initAuth = {
-  userName: "",
+  currentUser: {
+    id: "",
+    admin: false,
+    age: null,
+    avatar: "",
+    email: "",
+    name: "",
+    password: "",
+    listMessage: [],
+    status: "inactive"
+  },
   isLogin: false,
   isAdmin: false,
   email: "",
@@ -14,6 +25,12 @@ const initAuth = {
 
 function reducer(state, action) {
   switch (action.type) {
+    case 'LOGIN':
+      return {...state, currentUser: action.payload, isLogin: true};
+    case 'LOGOUT':
+      localStorage.removeItem("currentUser")
+      updateNode("users", state.currentUser.id, {status: "inactive"})
+      return {...state, currentUser: initAuth.currentUser, isLogin: false};
     case 'increment':
       return {...state, count: state.count + 1};
     case 'decrement':
