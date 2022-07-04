@@ -8,6 +8,6 @@ export interface userProps {
     email: string,
     name: string,
     password: string,
-    listMessage: any[]
+    friendsList: any[],
     status: "active" | "inactive"
 }

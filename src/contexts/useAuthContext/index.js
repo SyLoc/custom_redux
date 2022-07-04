@@ -10,7 +10,7 @@ const initAuth = {
     email: "",
     name: "",
     password: "",
-    listMessage: [],
+    friendsList: [],
     status: "inactive"
   },
   isLogin: false,

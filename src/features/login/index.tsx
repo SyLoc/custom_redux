@@ -27,8 +27,8 @@ const Login: React.FC<any> = () => {
                 if(user) {
                     if(user.password === password) {
                         const payload = {...user, password:"", status:"active"}
-                        onDispatchAuth({type:"LOGIN", payload: payload})
                         updateNode("users", user.id, {status: "active"})
+                        onDispatchAuth({type:"LOGIN", payload: payload})
                         localStorage.setItem("currentUser", JSON.stringify(payload))
                         navigate('/chat');
     

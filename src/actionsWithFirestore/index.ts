@@ -31,7 +31,8 @@ export const findUserByEmail = async (email: string) => {
     }
 }
 
-export const listenForRealtimeUpdate = onSnapshot(doc(db, "cities", "SF"), (doc) => {
+export const listenForRealtimeUpdate = onSnapshot(doc(db, "messages", "SF"), (doc) => {
+    // console.log("...doc.data(),", doc.data());
     return {
         ...doc.data(),
         id: doc.id
