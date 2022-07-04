@@ -27,7 +27,7 @@ export default function AuthRoute({ outlet } : AuthRouteProps) {
 
         setLoading(false)
 
-    }, [isLogin])
+    }, [isLogin, navigate, onDispatchAuth])
     
     if (loading) return (
         <div style={{textAlign:"center"}}><Spin size="large" /></div>

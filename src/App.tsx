@@ -5,10 +5,7 @@ import Login from "./features/login";
 import AuthProvider from "./contexts/useAuthContext"
 import ChatProvider from "./contexts/useChatContext";
 import Movies from "./features/movies"
-import TestTS from "./features/textTS"
 import AuthRoute from "./hocs/authRoute"
-import PrivateRoute from "./hocs/privateRoute"
-import MessageView from "./features/main/components/messageView";
 
 
 function App() {

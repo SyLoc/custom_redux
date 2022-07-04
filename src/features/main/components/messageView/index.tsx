@@ -36,9 +36,10 @@ const MessageView: React.FC<any> = () => {
                     setMessList(doc.data()?.contents)
                 });
             }
+            return 0
         })
 
-    }, [friendsList, onDispatchChat])
+    }, [friendsList, onDispatchChat, roomList, id])
 
     const handleSendMessage = (e: any) => {
         e.preventDefault()

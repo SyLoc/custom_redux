@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useAuthContext } from '../../contexts/useAuthContext'
 import { useChatContext } from '../../contexts/useChatContext'
-import { getNote, updateNode, getNotes } from "../../actionsWithFirestore/index"
+import { getNote, getNotes } from "../../actionsWithFirestore/index"
 import MessageView from './components/messageView'
 import FriendsList from "./components/friendsList";
 import { Routes, Route} from "react-router-dom"
@@ -14,8 +14,7 @@ const Main: React.FC<any> = () => {
     const { onDispatchAuth, currentUser } = useAuthContext();
     const { onDispatchChat, currentFriend, friendId } = useChatContext();
 
-
-    const getFriendsList = () => {
+    useEffect(() => {
         getNote('users', currentUser.id).then((data) => {
             return data?.friendsList
         }).then((frList) => {
@@ -28,11 +27,7 @@ const Main: React.FC<any> = () => {
                 onDispatchChat({type:"UPDATE_FRIENDS-LIST", payload: data})
             })
         })
-    }
-
-    useEffect(() => {
-        getFriendsList()
-    }, [])
+    }, [currentUser.id, onDispatchChat])
 
     // const handleAdd = () => {
     //     // createNote('users', {
