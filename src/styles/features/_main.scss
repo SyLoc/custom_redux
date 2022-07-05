@@ -197,7 +197,7 @@
                     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
                     border-radius: 0px 20px 20px 22px;
                     max-width: 75%;
-                    word-break: break-all;
+                    word-break: break-word;
                     margin-top: 25px;
                     color: #333;
                 }
@@ -214,6 +214,8 @@
                 left: auto;
                 border-radius: 20px 0px 20px 20px;
                 color: #333;
+                display: flex;
+                flex-direction: column;
             }
         }
 
@@ -222,6 +224,14 @@
             padding: 0px 20px;
             padding-bottom: 20px;
             color: #333;
+            position: relative;
+
+            .uploading{
+                font-size: 11px;
+                margin-left: 10px;
+                position: absolute;
+                top: -18px;
+            }
 
             .input-bonus {
                 display: flex;
@@ -233,13 +243,45 @@
                 position: relative;
 
                 svg:not(:first-child) {
-                    margin-left: 8px;
+                    margin-left: 12px;
                 }
 
                 .emoji-box {
                     position: absolute;
                     top: -295px;
                     left: 0px;
+                }
+
+                .preview-image {
+
+                    position: absolute;
+                    width: 100%;
+                    top: -65px;
+
+                    .img-wrap {
+
+                        position: relative;
+
+                        &:not(:first-child){
+                            margin-left: 10px;
+                        } 
+
+
+                        img {
+                            box-shadow: 0 0 3px #333;
+                            border-radius: 3px;
+                        }
+
+                        .delete-icon {
+                            position: absolute;
+                            top: -17px;
+                            right: 0px;
+                            color: #fff;
+                            width: 20px;
+                            height: 20px;
+                        }
+                    }
+
                 }
             }
 

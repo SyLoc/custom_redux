@@ -30,22 +30,22 @@ const Main: React.FC<any> = () => {
     }, [currentUser.id, onDispatchChat])
 
     // const handleAdd = () => {
-    //     // createNote('users', {
-    //     //     admin: false,
-    //     //     age: 32,
-    //     //     avatar: "https://i.pravatar.cc/210",
-    //     //     email: "rose@gmail.com",
-    //     //     name: "rose",
-    //     //     password: "rose321",
-    //     //     messages:[],
-    //     //     status: "inactive"
-    //     // })
+    // //     // createNote('users', {
+    // //     //     admin: false,
+    // //     //     age: 32,
+    // //     //     avatar: "https://i.pravatar.cc/210",
+    // //     //     email: "rose@gmail.com",
+    // //     //     name: "rose",
+    // //     //     password: "rose321",
+    // //     //     messages:[],
+    // //     //     status: "inactive"
+    // //     // })
 
-    //     updateNode("users", "slLdZ3cCqcoXQFX1DnYc", {
+    //     updateNode("users", "kmxuGVzZ7GRwy1TDo1kp", {
     //         friendsList: [
     //             {
-    //                 id:"rTQRP1ANTgF8x7iQrrjj",
-    //                 roomId:"KjziQPq6fuoc3YI5BvVM"
+    //                 id:"slLdZ3cCqcoXQFX1DnYc",
+    //                 roomId:"UIszHg4gLlLQNohBfGcn"
     //             }
     //         ]
     //     })
