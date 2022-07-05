@@ -21,7 +21,7 @@ export const deleteFile = (nameFile, onSuccess, onError) => {
   });
 }
 
-export default onUploadFile = (file, getProgress, getDownURL) => {
+const onUploadFile = (file, getProgress, getDownURL) => {
 
   if (!file) return
 
@@ -49,23 +49,7 @@ export default onUploadFile = (file, getProgress, getDownURL) => {
     (error) => {
       // A full list of error codes is available at
       // https://firebase.google.com/docs/storage/web/handle-errors
-      switch (error.code) {
-        case 'storage/unauthorized':
-          // User doesn't have permission to access the object
-          console.error("User doesn't have permission to access the object");
-          break;
-        case 'storage/canceled':
-          // User canceled the upload
-          console.error("User canceled the upload");
-          break;
-  
-        // ...
-  
-        case 'storage/unknown':
-          // Unknown error occurred, inspect error.serverResponse
-          console.error("Unknown error occurred, inspect error.serverResponse")
-          break;
-      }
+      console.log("error", error);
     }, 
     () => {
       // Upload completed successfully, now we can get the download URL
@@ -76,3 +60,6 @@ export default onUploadFile = (file, getProgress, getDownURL) => {
     }
   );
 }
+
+
+export default onUploadFile
