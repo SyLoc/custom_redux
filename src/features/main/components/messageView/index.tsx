@@ -78,7 +78,7 @@ const MessageView: React.FC<any> = () => {
                 dateSend: moment().format('LLL'),
                 dateUpdate: null,
                 replyMessageId: replyMess?.id || null,
-                replyContent: replyMess?.text ? replyMess?.text : (replyMess?.imgs[0] ? "image" : null)  
+                replyContent: replyMess?.text ? replyMess?.text : (replyMess?.imgs?.length > 0 ? "image" : null)  
             }
 
             updateNode("messages", roomId, { contents: [...messList, newMess] })
