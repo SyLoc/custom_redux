@@ -5,7 +5,7 @@ const storage = getStorage();
 // Create the file metadata
 /** @type {any} */
 const metadata = {
-  contentType: 'image/jpeg'
+  // contentType: 'image/jpeg'
 };
 
 export const deleteFile = (nameFile, onSuccess, onError) => {

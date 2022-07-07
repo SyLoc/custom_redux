@@ -41,10 +41,14 @@ const Main: React.FC<any> = () => {
     // //     //     status: "inactive"
     // //     // })
 
-    //     updateNode("users", "kmxuGVzZ7GRwy1TDo1kp", {
+    //     updateNode("users", "slLdZ3cCqcoXQFX1DnYc", {
     //         friendsList: [
     //             {
-    //                 id:"slLdZ3cCqcoXQFX1DnYc",
+    //                 id:"rTQRP1ANTgF8x7iQrrjj",
+    //                 roomId:"KjziQPq6fuoc3YI5BvVM"
+    //             },
+    //             {
+    //                 id:"kmxuGVzZ7GRwy1TDo1kp",
     //                 roomId:"UIszHg4gLlLQNohBfGcn"
     //             }
     //         ]

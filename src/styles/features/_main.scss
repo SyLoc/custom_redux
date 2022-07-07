@@ -178,6 +178,30 @@
             .message-item {
                 display: flex;
                 padding-bottom: 10px;
+                position: relative;
+
+                .delete-text-icon {
+                    color: #cd0808;
+                    font-size: 20px;
+                    position: absolute;
+                    top: 55%;
+                    transform: translateY(-50%);
+                    left: -26px;
+                    z-index: 10;
+                    display: none;
+                }
+
+                .reply-message {
+                    color: #19e0fa;
+                    font-size: 20px;
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    z-index: 10;
+                    right: -28px;
+                    z-index: 100;
+                    display: none;
+                }
 
                 &-avatar {
                     width: 55px;
@@ -200,6 +224,19 @@
                     word-break: break-word;
                     margin-top: 25px;
                     color: #333;
+                    position: relative;
+                }
+
+                .reply-content {
+                    display: none;
+                    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+                    border-radius: 15px;
+                    padding: 10px;
+                    position: relative;
+                    top: -14px;
+                    left: -20px;
+                    background: #f7f7f7;
+                    width: fit-content;
                 }
             }
         }
@@ -208,14 +245,60 @@
             display: flex;
             flex-direction: row-reverse;
             justify-content: flex-start;
+            transition: all .5s ease;
 
             .message-item-text{
-                right: 55px;
                 left: auto;
                 border-radius: 20px 0px 20px 20px;
                 color: #333;
                 display: flex;
                 flex-direction: column;
+                position: relative;
+
+                &::after {
+                    position: absolute;
+                    content: "";
+                    width: 100px;
+                    height: 30px;
+                    top: 50%;
+                    background-color: transparent;
+                    left: -25px;
+                    transform: translateY(-50%);
+                }
+
+                &:hover {
+                    .delete-text-icon {
+                        display: inline-block;
+                    }
+                }
+
+            }
+
+            .reply-content {
+                display: block;
+            }
+        }
+
+        .message-item--friend {
+            .message-item-text{
+                position: relative;
+
+                &::after {
+                    position: absolute;
+                    content: "";
+                    width: 100px;
+                    height: 30px;
+                    top: 50%;
+                    background-color: transparent;
+                    right: -35px;
+                    transform: translateY(-50%);
+                }
+
+                &:hover {
+                    .reply-message {
+                        display: inline-block;
+                    }
+                }
             }
         }
 
@@ -282,6 +365,43 @@
                         }
                     }
 
+                    .video-wrap {
+                        .delete-icon { 
+                            top: -55px;
+                        }
+                    }
+
+                }
+            }
+
+            .preview-reply-message {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                div {
+                    h4 {
+                        margin-bottom: 0;
+                        font-size: 13px;
+                        line-height: 1;
+                    }
+
+                    p{
+                        margin-bottom: 0;
+                        font-size: 11px;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 1;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+
+                    flex: 1;
+                }
+
+                svg {
+                    font-size: 20px;
+                    width: 40px;
                 }
             }
 
