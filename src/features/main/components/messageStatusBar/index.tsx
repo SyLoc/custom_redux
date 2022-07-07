@@ -2,20 +2,18 @@ import React from "react"
 import { Avatar } from 'antd';
 import { TbArrowBackUp } from "react-icons/tb"
 import { SiAuthy } from "react-icons/si"
+// import { RiSettings3Line } from "react-icons/ri"
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../../../contexts/useAuthContext"
 
 const BackIcon = (props: any) => {
-    const { skipPath = "" } = props
+    const { backToPath = "" } = props
     const navigate = useNavigate()
 
     const handleBack = () => {
-        if(skipPath) {
-            const pathName = window.location.pathname
-            if(pathName === skipPath) return
-        }
-        
-        navigate(-1)
+        if(document.location.pathname === backToPath) return
+
+        backToPath ? navigate(backToPath) : navigate('/')
     }
 
     return (
@@ -38,8 +36,9 @@ const MessageStatusBar: React.FC<any> = (props) => {
                 </div>
             </div>
             <div className="redirect-icons">
-                <BackIcon skipPath="/chat"/>
+                <BackIcon backToPath="/chat"/>
                 <SiAuthy/>
+                {/* <RiSettings3Line style={{ width: "22px", height: "22px" }} /> */}
             </div>
         </div>
     )

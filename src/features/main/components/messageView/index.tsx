@@ -186,7 +186,7 @@ const MessageView: React.FC<any> = () => {
                         let isCurrentUser = mess.userId === currentUser.id ? true : false
 
                         return (
-                            <div key={mess.id} className={`message-item ${isCurrentUser ? "message-item--sender" : "message-item--friend"}`}>
+                            <div id={mess.id} key={mess.id} className={`message-item ${isCurrentUser ? "message-item--sender" : "message-item--friend"}`}>
                                 <div className="message-item-avatar">
                                     <Avatar style={{ width: "100%", height: "100%" }} src={isCurrentUser ? currentUser?.avatar : currentFriend?.avatar} />
                                 </div>
@@ -197,11 +197,14 @@ const MessageView: React.FC<any> = () => {
                                     <div className="reply-message">
                                         <BsReply onClick={() => handleRepMess(mess.id)} />
                                     </div>
+                                    
                                     {
                                         mess?.replyMessageId && (
-                                            <div className="reply-content">
-                                                {mess?.replyContent.length > 22 ? mess?.replyContent.slice(0,22) + "..." : mess?.replyContent}  <ImReply/>
-                                            </div>
+                                            <a href={"#"+mess?.replyMessageId} style={{color: "#333"}}>
+                                                <div className="reply-content">
+                                                    {mess?.replyContent.length > 22 ? mess?.replyContent.slice(0,22) + "..." : mess?.replyContent}  <ImReply/>
+                                                </div>
+                                            </a>
                                         )
                                     }
                                     {
@@ -279,7 +282,7 @@ const MessageView: React.FC<any> = () => {
                 {
                     replyMess?.text || replyMess?.imgs?.length > 0 ? (
                         <div className="preview-reply-message">
-                            <div>
+                            <div className="reply-mess-content">
                                 <h4>Answering {replyMess?.imgs?.length > 0 && "image"}</h4>
                                 <p>{replyMess?.text}</p>
                             </div>
